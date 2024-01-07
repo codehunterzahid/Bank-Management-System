@@ -1,6 +1,5 @@
 #include<iostream>
 #include<cstring>
-#include <unistd.h>
 using namespace std;
 
 //structur for person to store data
@@ -45,79 +44,14 @@ int main(){
 
 // Function to clear screen for better user experience
 void clearScreen() {
-    // cout << "\033[H\033[J";
-        #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
-
+    cout << "\033[H\033[J";
 }
 
 // A main menu section where all options are given
 void Bank::choice(){
-
-    string username,password;
-    cout<<"\n\n\t\tBank Management System"<<endl;
-
-    cout << "\n\n\n\t\t|************************|"<<endl;
-    cout<<  "\n\t\t|--------Register--------|"<<endl;
-    cout << "\n\t\t|************************|"<<endl;
-
-	cout<<"\n\t\tEnter new username: ";
-
-	cin>>username;
-
-	cout<<"\t\tEnter new password: ";
-
-	cin>>password;
-
-	cout<<"\t\tYour new id is creating please wait";
-
-	for(int i=0;i<6;i++)
-
-	{
-
-		cout<<".";
-
-		sleep(2);
-
-	}
-
-	cout<<"\n\t\tYour id created successfully";
-
-	sleep(2);
-
-	start:
-
-	clearScreen();
-
-	string usrn,pswd;
-
-	cout<<"\n\n\t\tBank Management System"<<endl;
-
-    cout << "\n\n\n\t\t|************************|"<<endl;
-    cout<<  "\n\t\t|--------LOG IN--------|"<<endl;
-    cout << "\n\t\t|************************|"<<endl;
-
-	cout<<"\n\t\tEnter username: ";
-
-	cin>>usrn;
-
-	cout<<"\t\tEnter password: ";
-
-	cin>>pswd;
-
-	if(usrn==username&&pswd==password)
-
-	{
-
-        clearScreen();
-
     int ch;
 
     while(1){
-
         cout << "Welcome To Main Menu " << endl;
         cout << "--------------------" << endl;
 
@@ -171,43 +105,6 @@ void Bank::choice(){
 
     }
 }
-else if(usrn!=username)
-
-  {
-
-  	cout<<"\t\t\aInvalid username please try again";
-
-  	sleep(3);
-
-  	goto start;
-
-  }
-
-  else if(pswd!=password)
-
-  {
-
-  	cout<<"\t\t\aInvalid password please try again";
-
-  	sleep(3);
-
-  	goto start;
-
-  }
-
-  else{
-
-  	cout<<"\t\t\aInvalid username and password";
-
-  	sleep(3);
-
-  	goto start;
-
-  }
-
-}
-
-
 
 // Function for new account Creation
 
