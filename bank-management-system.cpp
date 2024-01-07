@@ -80,7 +80,7 @@ void Bank::choice(){
 
 		cout<<".";
 
-		sleep(2);
+		sleep(1);
 
 	}
 
@@ -245,114 +245,120 @@ void Bank::showDetails(){
             cout << "Pin : " << data[i].pin << endl;
             cout << "Cash : " << data[i].cash << endl;
             cout << "Phone : " << data[i].phone << endl;
-        } else{
-            cout << "Invalid ID" << endl;
-            goto idAgain;
+            return;
         }
     }
+    cout << "Invalid ID" << endl;
+    goto idAgain;
 }
 
-void Bank::deposit(){
 
+void Bank::deposit() {
     int cash;
-    idForDeposit:
-    cout << "Enter ID : ";
-    cin >> id;
 
-    for (int i = 0; i < total; i++)
-    {
-        if(id == data[i].ID){
-            cout << "Enter Amount : ";
-            cin >> cash;
-            if(cash < 500){
-                cout << "Enter Amount Greater Than 500 : ";
+    while (true) {
+        cout << "Enter ID : ";
+        cin >> id;
+
+        for (int i = 0; i < total; i++) {
+            if (id == data[i].ID) {
+                cout << "Enter Amount : ";
                 cin >> cash;
+                if (cash < 500) {
+                    cout << "Enter Amount Greater Than 500 : ";
+                    cin >> cash;
+                }
+
+                data[i].cash += cash;
+
+                cout << "Amount Deposited" << endl;
+                cout << "Your New Cash : " << data[i].cash << endl;
+                return;
             }
-        } else{
-            cout << "Invalid ID Try again : " << endl;
-            goto idForDeposit;
         }
 
-
-        data[i].cash+=cash;
-
-    cout << "Amount Deposited" << endl;
-    cout << "Your New Cash : " << data[i].cash << endl;
+        cout << "Invalid ID. Try again." << endl;
     }
 }
 
-void Bank::withdraw(){
+
+void Bank::withdraw() {
     int cash;
 
-    again:
-    cout << "Enter ID : ";
-    cin >> id;
+    while (true) {
+        cout << "Enter ID : ";
+        cin >> id;
 
-    for (int i = 0; i < total; i++){
-        if(id == data[i].ID){
+        for (int i = 0; i < total; i++) {
+            if (id == data[i].ID) {
+                Amount:
+                cout << "Enter Amount : ";
+                cin >> cash;
+                if (cash > data[i].cash) {
+                    cout << "Insufficient Balance" << endl;
+                    cout << "Your Current Balance: " << data[i].cash << endl;
+                } else if (cash < 500) {
+                    cout << "Enter Amount Greater Than 500 : ";
+                    goto Amount;
+                } else if (cash > 25000) {
+                    cout << "Enter Amount Less Than 25000 At 1 time : ";
+                    goto Amount;
+                } else {
+                    cout << "Withdraw Successful" << endl;
+                }
 
-            Amount:
-            cout << "Enter Amount : ";
-            cin >> cash;
-            if(cash>data[i].cash){
-                cout << "Insufficient Balance" << endl;
-                cout << data[i].cash << endl;
-            } else if(cash < 500){
-                cout << "Enter Amount Greater Than 500 : ";
-                goto Amount;
-            } else if(cash > 25000){
-                cout << "Enter Amount Less Than 25000 At 1 time : ";
-                goto Amount;
-            } else{
-                cout << "Withdraw Successfull" << endl;
+                data[i].cash -= cash;
+
+                cout << "Amount Withdrawn" << endl;
+                cout << "Your New Cash : " << data[i].cash << endl;
+
+                return;
             }
-        } else{
-            cout << "Invalid ID Try again : " << endl;
-            goto again;
         }
 
-
-        data[i].cash-=cash;
-
-    cout << "Amount Withdrawn" << endl;
-    cout << "Your New Cash : " << data[i].cash << endl;
-    }
-
-}
-
-void Bank::checkBalance(){
-
-    check:
-    cout << "Enter ID : ";
-    cin >> id; 
-
-    for(int i = 0; i < total; i++){
-        if(id == data[i].ID){
-            cout << "Consumer Name :" << data[i].name << endl;
-            cout << "Your Cash : " << data[i].cash << endl;
-        } else{
-            cout << "Invalid ID" << endl;
-            goto check;
-        }
+        cout << "Invalid ID. Try again." << endl;
     }
 }
 
-void Bank::deleteAccount(){
 
-    cout << "Enter ID : ";
-    cin >> id;
+void Bank::checkBalance() {
+    while (true) {
+        cout << "Enter ID : ";
+        cin >> id;
 
-    for(int i=0; i < total; i++){
-        if(id == data[i].ID){
-            for(int j = i; j < total - 1; j++){
-                data[j] = data[j+1];
+        for (int i = 0; i < total; i++) {
+            if (id == data[i].ID) {
+                cout << "Consumer Name: " << data[i].name << endl;
+                cout << "Your Cash : " << data[i].cash << endl;
+
+                return;
             }
-            total--;
-            cout << "Account Deleted" << endl;
-        } else{
-            cout << "No Such Record Found : " << endl;
-            break;
         }
+
+        cout << "Invalid ID. Try again." << endl;
+    }
+}
+
+
+void Bank::deleteAccount() {
+    while (true) {
+        cout << "Enter ID : ";
+        cin >> id;
+
+        for (int i = 0; i < total; i++) {
+            if (id == data[i].ID) {
+                for (int j = i; j < total - 1; j++) {
+                    data[j] = data[j + 1];
+                }
+                total--;
+
+                cout << "Account Deleted" << endl;
+
+                return;
+            }
+        }
+
+        cout << "No Such Record Found. Try again." << endl;
     }
 }
 
