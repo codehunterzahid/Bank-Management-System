@@ -26,6 +26,7 @@ class Bank{
 
     void choice();
     void newAccount();
+    void deposit();
 
 
 };
@@ -61,6 +62,10 @@ void Bank::choice(){
             case 1:
                 Bank::newAccount();
             break;
+
+            case 2:
+                Bank::deposit();
+            break;
         }
 
     }
@@ -85,5 +90,33 @@ void Bank::newAccount(){
     cout << "Enter Phone : ";
     cin >> data[total].phone;
 
-
+    total++;
 }
+
+void Bank::deposit(){
+    back:
+    cout << "Enter ID : ";
+    cin >> id;
+
+    for (int i = 0; i < total; i++)
+    {
+        if(id == data[i].ID){
+            cout << "Enter Amount : ";
+            cin >> data[i].cash;
+            if(data[i].cash < 500){
+                cout << "Enter Amount Greater Than 500 : ";
+                cin >> data[i].cash;
+            }
+        } else{
+            cout << "Invalid ID Try again : " << endl;
+            goto back;
+        }
+
+
+        data[total].cash+=data[i].cash;
+
+    cout << "Amount Deposited" << endl;
+    cout << "Your New Cash : " << data[total].cash << endl;
+    }
+}
+
