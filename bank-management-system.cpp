@@ -27,6 +27,7 @@ class Bank{
     void choice();
     void newAccount();
     void deposit();
+    void withdraw();
 
 
 };
@@ -66,6 +67,10 @@ void Bank::choice(){
             case 2:
                 Bank::deposit();
             break;
+
+            case 3:
+                Bank::withdraw();
+            break;
         }
 
     }
@@ -94,6 +99,8 @@ void Bank::newAccount(){
 }
 
 void Bank::deposit(){
+
+    int cash;
     back:
     cout << "Enter ID : ";
     cin >> id;
@@ -102,10 +109,10 @@ void Bank::deposit(){
     {
         if(id == data[i].ID){
             cout << "Enter Amount : ";
-            cin >> data[i].cash;
-            if(data[i].cash < 500){
+            cin >> cash;
+            if(cash < 500){
                 cout << "Enter Amount Greater Than 500 : ";
-                cin >> data[i].cash;
+                cin >> cash;
             }
         } else{
             cout << "Invalid ID Try again : " << endl;
@@ -113,10 +120,48 @@ void Bank::deposit(){
         }
 
 
-        data[total].cash+=data[i].cash;
+        data[i].cash+=cash;
 
     cout << "Amount Deposited" << endl;
-    cout << "Your New Cash : " << data[total].cash << endl;
+    cout << "Your New Cash : " << data[i].cash << endl;
     }
 }
 
+void Bank::withdraw(){
+    int cash;
+
+    cout << "Enter ID : ";
+    cin >> id;
+
+    back:
+    for (int i = 0; i < total; i++){
+        if(id == data[i].ID){
+
+            Amount:
+            cout << "Enter Amount : ";
+            cin >> cash;
+            if(cash>data[i].cash){
+                cout << "Insufficient Balance" << endl;
+                goto Amount;
+            } else if(cash < 500){
+                cout << "Enter Amount Greater Than 500 : ";
+                cin >> cash;
+            } else if(cash > 25000){
+                cout << "Enter Amount Less Than 25000 At 1 time : ";
+                cin >> cash;
+            } else{
+                cout << "Withdraw Successfull" << endl;
+            }
+        } else{
+            cout << "Invalid ID Try again : " << endl;
+            goto back;
+        }
+
+
+        data[i].cash-=cash;
+
+    cout << "Amount Withdrawn" << endl;
+    cout << "Your New Cash : " << data[i].cash << endl;
+    }
+
+}
