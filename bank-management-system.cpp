@@ -247,7 +247,8 @@ void Bank::deleteAccount(){
             total--;
             cout << "Account Deleted" << endl;
         } else{
-            cout << "Invalid ID" << endl;
+            cout << "No Such Record Found : " << endl;
+            break;
         }
     }
 }
