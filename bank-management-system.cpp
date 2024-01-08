@@ -248,8 +248,9 @@ void Bank::showDetails(){
             return;
         }
     }
-    cout << "Invalid ID" << endl;
-    goto idAgain;
+    cout << "Check Your ID or Create Account First" << endl;
+    // goto idAgain;
+    return;
 }
 
 
