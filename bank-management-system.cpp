@@ -281,7 +281,7 @@ void Bank::deposit() {
     }
 }
 
-
+// Function for withdrawing amount
 void Bank::withdraw() {
     int cash;
 
