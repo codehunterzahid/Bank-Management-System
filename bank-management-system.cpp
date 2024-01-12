@@ -320,7 +320,7 @@ void Bank::withdraw() {
     }
 }
 
-
+// check balance function
 void Bank::checkBalance() {
     while (true) {
         cout << "Enter ID : ";
