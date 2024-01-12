@@ -339,7 +339,7 @@ void Bank::checkBalance() {
     }
 }
 
-
+// delete account
 void Bank::deleteAccount() {
     while (true) {
         cout << "Enter ID : ";
