@@ -54,6 +54,7 @@ void clearScreen() {
 
 }
 
+
 // A main menu section where all options are given
 void Bank::choice(){
 
