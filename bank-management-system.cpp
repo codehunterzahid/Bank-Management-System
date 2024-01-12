@@ -252,7 +252,7 @@ void Bank::showDetails(){
     return;
 }
 
-
+// Function for depositing amount
 void Bank::deposit() {
     int cash;
 
