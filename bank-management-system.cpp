@@ -362,7 +362,7 @@ void Bank::deleteAccount() {
     }
 }
 
-
+// exit function
 void Bank::Exit(){
 
     exit(0);
